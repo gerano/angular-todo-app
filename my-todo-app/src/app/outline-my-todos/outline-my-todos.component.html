@@ -1,0 +1,11 @@
+<section class="main" *ngIf="myTodos.length > 0">
+    <ul class="todo-list">
+      <li *ngFor="let todo of myTodos" [class.completed]="todo.complete">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleComplete(todo)" [checked]="todo.complete">
+          <label>{{todo.title}}</label>
+          <app-remove-my-todo [myParentTodo]=todo></app-remove-my-todo>
+        </div>
+      </li>
+    </ul>
+</section>
