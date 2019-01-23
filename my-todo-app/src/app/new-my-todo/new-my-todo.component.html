@@ -1,4 +1,8 @@
-<h1>Todos</h1>
-<input class="new-todo" placeholder="Please add your Todos" autofocus="" [(ngModel)]="newMyTodo.title" (keyup.enter)="addTodo()">
-
-
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span class="align-middle">Todos</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <span class="align-middle"><input placeholder="Please add your Todos" autofocus="" [(ngModel)]="newMyTodo.title" (keyup.enter)="addTodo()"></span> 
+    </mat-toolbar-row>
+</mat-toolbar>

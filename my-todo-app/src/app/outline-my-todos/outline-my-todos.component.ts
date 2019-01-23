@@ -6,7 +6,7 @@ import { MyTodo } from '../my-todo';
 @Component({
   selector: 'app-outline-my-todos',
   templateUrl: './outline-my-todos.component.html',
-  styleUrls: ['./outline-my-todos.component.sass'],
+  styleUrls: ['./outline-my-todos.component.css'],
 })
 export class OutlineMyTodosComponent implements OnInit {
   //Contructor injection of Service Class

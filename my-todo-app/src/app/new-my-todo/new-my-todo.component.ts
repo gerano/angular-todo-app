@@ -3,9 +3,9 @@ import {MyTodoDataService} from '../my-todo-data.service'
 import { MyTodo } from '../my-todo';
 
 @Component({
-  selector: '.app-new-my-todo',
+  selector: 'app-new-my-todo',
   templateUrl: './new-my-todo.component.html',
-  styleUrls: ['./new-my-todo.component.sass'],
+  styleUrls: ['./new-my-todo.component.css'],
 })
 export class NewMyTodoComponent implements OnInit {
 

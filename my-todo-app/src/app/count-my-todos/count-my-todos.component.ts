@@ -4,7 +4,7 @@ import {MyTodoDataService} from '../my-todo-data.service'
 @Component({
   selector: 'app-count-my-todos',
   templateUrl: './count-my-todos.component.html',
-  styleUrls: ['./count-my-todos.component.sass']
+  styleUrls: ['./count-my-todos.component.css']
 })
 export class CountMyTodosComponent implements OnInit {
 

@@ -1,11 +1,14 @@
-<section class="main" *ngIf="myTodos.length > 0">
-    <ul class="todo-list">
-      <li *ngFor="let todo of myTodos" [class.completed]="todo.complete">
-        <div class="view">
-          <input class="toggle" type="checkbox" (click)="toggleComplete(todo)" [checked]="todo.complete">
-          <label>{{todo.title}}</label>
-          <app-remove-my-todo [myParentTodo]=todo></app-remove-my-todo>
-        </div>
-      </li>
-    </ul>
-</section>
+<div class="center">
+<mat-card-content class="todoapp" *ngIf="myTodos.length > 0">
+  <mat-list>
+    <form>
+      <mat-list-item *ngFor="let todo of myTodos; let index = index" class="list-item" [class.completed]="todo.complete">
+        <mat-checkbox color="primary" [name]="'item'+index" (click)="toggleComplete(todo)" [ngModel]="todo.complete">  
+          <span [class.complete]="todo.complete">{{todo.title}}</span>
+        </mat-checkbox>
+        <app-remove-my-todo [myParentTodo]=todo></app-remove-my-todo>
+      </mat-list-item>
+    </form>
+  </mat-list>
+</mat-card-content>
+</div>
