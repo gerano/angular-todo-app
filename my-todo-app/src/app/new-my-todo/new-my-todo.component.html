@@ -1,8 +1,27 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="md-hue-1" ng-show="true" >
     <mat-toolbar-row>
-        <span class="align-middle">Todos</span>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <span class="align-middle"><input placeholder="Please add your Todos" autofocus="" [(ngModel)]="newMyTodo.title" (keyup.enter)="addTodo()"></span> 
+        <span><mat-icon>mood</mat-icon></span>
+        <span>A Todo App!</span>
+        <button mat-icon-button [mat-menu-trigger-for]="menu">
+                <mat-icon>more_vert</mat-icon>
+        </button>
     </mat-toolbar-row>
 </mat-toolbar>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center center">
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Please add your Todos" autofocus="" name="title" [(ngModel)]="newMyTodo.title" (keyup.enter)="addTodo()">
+            </mat-form-field> 
+        </div>
+</div>
+
+<mat-menu x-position="before" #menu="matMenu">
+        <button mat-menu-item>Option 1</button>
+        <button mat-menu-item>Option 2</button>
+</mat-menu>
+
+
+
+
+    
+

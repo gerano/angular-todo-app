@@ -2,6 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCheckboxModule} from '@angular/material';
+import {MatListModule} from '@angular/material/list';
 import {NewMyTodoComponent} from './new-my-todo/new-my-todo.component';
 import {OutlineMyTodosComponent} from './outline-my-todos/outline-my-todos.component';
 import {CountMyTodosComponent} from './count-my-todos/count-my-todos.component';
@@ -19,7 +21,15 @@ describe('AppComponent', () => {
         NewMyTodoComponent,
         OutlineMyTodosComponent,
         CountMyTodosComponent,
-        RemoveMyTodoComponent
+        RemoveMyTodoComponent,
+        MatButtonModule, 
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule, 
+        MatToolbarModule, 
+        MatIconModule, 
+        MatCheckboxModule,
+        MatListModule
 
       ],
     }).compileComponents();

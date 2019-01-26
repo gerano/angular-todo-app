@@ -1,9 +1,9 @@
-<div class="center">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.1%" fxLayoutAlign="center center">
 <mat-card-content class="todoapp" *ngIf="myTodos.length > 0">
   <mat-list>
     <form>
       <mat-list-item *ngFor="let todo of myTodos; let index = index" class="list-item" [class.completed]="todo.complete">
-        <mat-checkbox color="primary" [name]="'item'+index" (click)="toggleComplete(todo)" [ngModel]="todo.complete">  
+        <mat-checkbox color="primary" [name]="'item'+index" [checked]="todo.complete" (change)="toggleComplete(todo)" [ngModel]="todo.complete">  
           <span [class.complete]="todo.complete">{{todo.title}}</span>
         </mat-checkbox>
         <app-remove-my-todo [myParentTodo]=todo></app-remove-my-todo>

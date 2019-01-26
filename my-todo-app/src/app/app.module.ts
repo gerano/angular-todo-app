@@ -1,8 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCheckboxModule} from '@angular/material';
+import { MatCardModule, 
+  MatFormFieldModule, 
+  MatInputModule, 
+  MatButtonModule, 
+  MatToolbarModule, 
+  MatIconModule, 
+  MatCheckboxModule,
+  MatMenuModule
+} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { NewMyTodoComponent } from './new-my-todo/new-my-todo.component';
@@ -25,11 +34,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule, 
-    MatCardModule, 
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule, 
     MatToolbarModule, 
     MatIconModule, 
     MatCheckboxModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule,
+    FlexLayoutModule
   ],
   providers: [MyTodoDataService],
   bootstrap: [AppComponent]
