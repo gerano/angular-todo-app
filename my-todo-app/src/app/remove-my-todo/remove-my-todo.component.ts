@@ -19,6 +19,6 @@ export class RemoveMyTodoComponent implements OnInit {
   }
   
   remove() {
-    this.myTodoDataService.deleteById(this.myParentTodo.id);
+    this.myTodoDataService.deleteById(this.myParentTodo.todoId);
   } 
 }

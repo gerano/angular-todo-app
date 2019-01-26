@@ -25,7 +25,6 @@ export class NewMyTodoComponent implements OnInit {
     }
 
     this.myTodoDataService.add(this.newMyTodo);
-    console.log('THE TODO:' + JSON.stringify(this.newMyTodo));
     this.newMyTodo = new MyTodo();
   }
 }

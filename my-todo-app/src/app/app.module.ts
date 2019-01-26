@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http'
 import { MatCardModule, 
   MatFormFieldModule, 
   MatInputModule, 
@@ -42,7 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     MatCheckboxModule,
     MatListModule,
     MatMenuModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [MyTodoDataService],
   bootstrap: [AppComponent]

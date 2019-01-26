@@ -1,5 +1,5 @@
 export class MyTodo {
-    id: number; 
+    todoId: number; 
     title: string = '';
     complete: boolean = false;
 
