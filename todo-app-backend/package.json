@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit 'test/api.test.js'"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,8 @@
     "mongoose": "^5.4.6"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "supertest": "^3.4.2"
   }
 }
