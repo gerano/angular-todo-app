@@ -13,7 +13,7 @@ import { startWith, switchMap } from 'rxjs/operators';
 })
 export class OutlineMyTodosComponent implements OnInit {
 
- @Input() private todos$: MyTodo[]= [];
+ private todos$: MyTodo[]= [];
 
   //Contructor injection of Service Class
   constructor(private myTodoDataService: MyTodoDataService) { 

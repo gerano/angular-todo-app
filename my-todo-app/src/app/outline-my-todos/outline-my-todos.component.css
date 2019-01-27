@@ -2,3 +2,17 @@
   color: #9d9d9d;
   text-decoration: line-through;
 }
+
+.truncate{
+  display: block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate:hover {
+  text-overflow: clip;
+  white-space: normal;
+  word-break: normal;
+}
+  
