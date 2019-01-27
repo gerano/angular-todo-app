@@ -12,8 +12,8 @@ import { startWith, switchMap } from 'rxjs/operators';
   styleUrls: ['./outline-my-todos.component.css'],
 })
 export class OutlineMyTodosComponent implements OnInit {
-
- private todos$: MyTodo[]= [];
+  
+  private todos$: MyTodo[]= [];
 
   //Contructor injection of Service Class
   constructor(private myTodoDataService: MyTodoDataService) { 

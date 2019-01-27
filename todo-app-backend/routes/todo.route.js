@@ -64,7 +64,7 @@ todoRoutes.route('/:id').delete(function (req, res) {
 	
 	res.set('Content-Type', 'application/json');
 	
-    Todo.remove({
+    Todo.deleteOne({
 		todoId: req.params.id
 	}).then(() => {
       	res.status(204).json('Successfully removed');
