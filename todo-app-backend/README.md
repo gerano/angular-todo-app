@@ -1,6 +1,6 @@
 # MyTodoApp Backend
 
-The backend is following the MEAN stack approach
+The backend is following the MEAN stack approach.
 
 ## Development server
 
@@ -15,7 +15,7 @@ Run `npm test` to execute the API tests via [Supertest](https://github.com/visio
 To get more help, the following links are a good starter:
 - [NodeJS](https://nodejs.org/en/)
 - [ExpressJS](https://expressjs.com/)
--[MongooseJS](https://mongoosejs.com/)
+- [MongooseJS](https://mongoosejs.com/)
 
 ## References
 To implement this project I have been using mainly these resources to work with:
