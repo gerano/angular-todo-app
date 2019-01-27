@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {MyTodoDataService} from '../my-todo-data.service'
 import {RemoveMyTodoComponent} from '../remove-my-todo/remove-my-todo.component';
 import { MyTodo } from '../my-todo';
 import { HttpResponse } from '@angular/common/http';
+import { Observable, timer, interval } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-outline-my-todos',
@@ -11,22 +13,21 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class OutlineMyTodosComponent implements OnInit {
 
-  //private todos: MyTodo[] = [];
+ @Input() private todos$: MyTodo[]= [];
 
   //Contructor injection of Service Class
   constructor(private myTodoDataService: MyTodoDataService) { 
   }
 
   ngOnInit() {
-    /*return this.myTodoDataService.getAll().subscribe((data: MyTodo[]) => {
-      console.log('The Data: ' + JSON.stringify(data));
-      this.todos = data;
-    });*/
+    const eventSource = timer(0, 500);
+    eventSource.pipe(switchMap(() =>this.myTodoDataService.getAll())).subscribe((data: MyTodo[]) => this.todos$ = data);
+    console.log(JSON.stringify(this.todos$));
   }
   
   get myTodos(){
-    return this.myTodoDataService.getAll();
-    //return this.todos;
+    //return this.myTodoDataService.getAll();
+    return this.todos$;
   }
 
   toggleComplete(myTodo: MyTodo) {

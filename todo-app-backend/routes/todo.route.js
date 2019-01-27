@@ -45,13 +45,13 @@ todoRoutes.route('/:id').put(function (req, res) {
 	
 	res.set('Content-Type', 'application/json');
 	
-	Todo.updateOne({todoId: req.params.id}, { $set: {title: req.body.title, complete:req.body.complete}}, 
-	function(err, todo){
-		if (err) {
-			res.status(400).json("Unable to update the database");
-		}
-		res.status(204).json('Update complete');
-	}).then(todo => {
+	let updatedMyTodo = {complete:req.body.complete};
+	
+	if (req.body.title) {
+		Object.assign(updatedMyTodo, {title: req.body.title});
+	}
+	
+	Todo.updateOne({todoId: req.params.id}, { $set: updatedMyTodo}).then(() => {
       	res.status(204).json('Update complete');
     })
     .catch(err => {
@@ -60,17 +60,18 @@ todoRoutes.route('/:id').put(function (req, res) {
 });
 
 // DELETE by id
-todoRoutes.route('/:id').get(function (req, res) {
+todoRoutes.route('/:id').delete(function (req, res) {
+	
+	res.set('Content-Type', 'application/json');
+	
     Todo.remove({
 		todoId: req.params.id
-	}, function(err, business) {
-        if(err) {
-			res.json(err);
-		}
-        else {
-			res.json('Successfully removed');
-		}
-    });
+	}).then(() => {
+      	res.status(204).json('Successfully removed');
+    })
+    .catch(err => {
+    	res.status(400).json('Unable to delete. The error ' + err);
+    });;
 });
 
 module.exports = todoRoutes;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MyTodo } from './my-todo';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable} from 'rxjs';
 
 @Injectable({
@@ -11,10 +11,7 @@ export class MyTodoDataService {
   private uri = 'http://localhost:4000/todo';
 
   // we need to store the lastId in order to provide a kind of autoinc solution
-  //TODO: maybe let us retrieve the Todos from a NodeJS backend having a mongo db  in place?
   private lastId: number = 0;
-
-  //TODO: get this from a NodeJs backend having a mongo db  maybe?
   private myTodos: MyTodo[] = [];
 
   constructor(private http: HttpClient) { }
@@ -25,42 +22,48 @@ export class MyTodoDataService {
       myTodo.todoId = ++this.lastId;
     }
     console.log(JSON.stringify(myTodo));
-    this.myTodos.push(myTodo);
-    /*this.http.post(`${this.uri}`, myTodo).subscribe(res => {
+    //this.myTodos.push(myTodo);
+
+    this.http.post(`${this.uri}`, myTodo).subscribe(res => {
       console.log('Done with response:' + JSON.stringify(res))
       this.myTodos.push(myTodo);
-    })*/
+    })
     return this;
   }
 
   //DELETE /todos/:id
   public deleteById(id: number): MyTodoDataService {
-    this.myTodos = this.myTodos.filter(myTodo => myTodo.todoId !== id);
+    //this.myTodos = this.myTodos.filter(myTodo => myTodo.todoId !== id);
+    this.removeMyTodo(id).subscribe(response => console.log(JSON.stringify(response)));
     return this;
   }
 
   //PUT /todos/:id
   public updateById(id: number, values: Object = {}): MyTodo {
-
-    //TODO: read this from the NodeJS backend
-    let myTodo = this.getById(id);
-
+    /*let myTodo = this.getById(id);
     if (!myTodo) {
       return null;
     }
-
     Object.assign(myTodo,  values);
-    return myTodo;
+    return myTodo;*/
+
+    let updatedMyTodo: MyTodo; 
+    console.log('UPDATE with id ' + id + ' and  obj ' + JSON.stringify(values));
+    this.updateMyTodo(id, values).subscribe((response) => 
+              this.getById(id).subscribe(
+                (updatedTodo: MyTodo) => {
+                  updatedMyTodo = updatedTodo;
+                  console.log('UPDATED obj ' + JSON.stringify(updatedTodo));
+                }
+              )
+    );
+    return updatedMyTodo;
   }
 
-  public getAll(): MyTodo[] {
-  //public getAll() {
-    return this.myTodos;
-    //return this.http.get(`${this.uri}`);;
-  }
-
-  public getById(id: number): MyTodo {
-    return this.myTodos.filter(myTodo => myTodo.todoId === id).pop();
+  //public getAll(): MyTodo[] {
+  public getAll() {
+    //return this.myTodos;
+    return this.http.get(`${this.uri}`);
   }
 
   public toggleComplete(myTodo: MyTodo): MyTodo {
@@ -70,5 +73,36 @@ export class MyTodoDataService {
     return updated;
   }
 
+  private getById(todoId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    let params = new HttpParams();
+    
+    headers.set('Content-Type', 'application/json');
+    params.set("id", String(todoId));
 
+    return this.http.get(`${this.uri}/${todoId}`, { headers, params });
+    //return this.myTodos.filter(myTodo => myTodo.todoId === id).pop();
+  }
+
+  private removeMyTodo(todoId: number): Observable<any> {
+    let headers = new HttpHeaders();
+    let params = new HttpParams();
+    
+    headers.set('Content-Type', 'application/json');
+    params.set("id", String(todoId));
+
+    return this.http.delete(`${this.uri}/${todoId}`, { headers, params });
+  }
+
+  private updateMyTodo(todoId: number, values: Object = {}): Observable<any> {
+    let headers = new HttpHeaders();
+    let params = new HttpParams();
+    
+    headers.set('Content-Type', 'application/json');
+    params.set("id", String(todoId));
+
+    return this.http.put(`${this.uri}/${todoId}`, values, { headers, params });
+    //return this.http.request("PUT",`${this.uri}`,{body: values, responseType:"json", headers: headers, params: params});
+    
+  }
 }
