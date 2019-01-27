@@ -22,7 +22,6 @@ export class MyTodoDataService {
       myTodo.todoId = ++this.lastId;
     }
     console.log(JSON.stringify(myTodo));
-    //this.myTodos.push(myTodo);
 
     this.http.post(`${this.uri}`, myTodo).subscribe(res => {
       console.log('Done with response:' + JSON.stringify(res))
@@ -33,20 +32,12 @@ export class MyTodoDataService {
 
   //DELETE /todos/:id
   public deleteById(id: number): MyTodoDataService {
-    //this.myTodos = this.myTodos.filter(myTodo => myTodo.todoId !== id);
     this.removeMyTodo(id).subscribe(response => console.log(JSON.stringify(response)));
     return this;
   }
 
   //PUT /todos/:id
   public updateById(id: number, values: Object = {}): MyTodo {
-    /*let myTodo = this.getById(id);
-    if (!myTodo) {
-      return null;
-    }
-    Object.assign(myTodo,  values);
-    return myTodo;*/
-
     let updatedMyTodo: MyTodo; 
     console.log('UPDATE with id ' + id + ' and  obj ' + JSON.stringify(values));
     this.updateMyTodo(id, values).subscribe((response) => 
@@ -60,9 +51,7 @@ export class MyTodoDataService {
     return updatedMyTodo;
   }
 
-  //public getAll(): MyTodo[] {
   public getAll() {
-    //return this.myTodos;
     return this.http.get(`${this.uri}`);
   }
 
@@ -81,7 +70,6 @@ export class MyTodoDataService {
     params.set("id", String(todoId));
 
     return this.http.get(`${this.uri}/${todoId}`, { headers, params });
-    //return this.myTodos.filter(myTodo => myTodo.todoId === id).pop();
   }
 
   private removeMyTodo(todoId: number): Observable<any> {
@@ -102,7 +90,5 @@ export class MyTodoDataService {
     params.set("id", String(todoId));
 
     return this.http.put(`${this.uri}/${todoId}`, values, { headers, params });
-    //return this.http.request("PUT",`${this.uri}`,{body: values, responseType:"json", headers: headers, params: params});
-    
   }
 }

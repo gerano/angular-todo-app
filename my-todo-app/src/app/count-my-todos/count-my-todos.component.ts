@@ -25,7 +25,6 @@ export class CountMyTodosComponent implements OnInit {
   }
 
   get myTodos() {
-    //return this.myTodoDataService.getAll();
     return this.todos$;
   }
 }

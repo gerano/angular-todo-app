@@ -26,7 +26,6 @@ export class OutlineMyTodosComponent implements OnInit {
   }
   
   get myTodos(){
-    //return this.myTodoDataService.getAll();
     return this.todos$;
   }
 
