@@ -2,11 +2,11 @@
 <mat-card-content class="todoapp" *ngIf="myTodos.length > 0">
   <mat-list>
     <form>
-      <mat-list-item *ngFor="let todo of myTodos; let index = index" class="list-item" [class.completed]="todo.complete">
-        <mat-checkbox color="primary" [name]="'item'+index" [checked]="todo.complete" (change)="toggleComplete(todo)" [ngModel]="todo.complete">  
-          <div class="truncate" [class.complete]="todo.complete">{{todo.title}}</div>
+      <mat-list-item *ngFor="let myCurrentToDo of myTodos; let index = index" class="list-item" [class.completed]="myCurrentToDo.complete">
+        <mat-checkbox color="primary" [name]="'item'+index" [checked]="myCurrentToDo.complete" (change)="toggleComplete(myCurrentToDo)" [ngModel]="myCurrentToDo.complete">  
+          <div class="truncate" [class.complete]="myCurrentToDo.complete">{{myCurrentToDo.title}}</div>
         </mat-checkbox>
-        <app-remove-my-todo [myParentTodo]=todo></app-remove-my-todo>
+        <app-remove-my-todo [myParentToDo]=myCurrentToDo></app-remove-my-todo>
       </mat-list-item>
     </form>
   </mat-list>

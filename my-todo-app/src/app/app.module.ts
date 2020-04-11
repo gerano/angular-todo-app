@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HttpClient} from '@angular/common/http'
 import { MatCardModule, 
   MatFormFieldModule, 
   MatInputModule, 
@@ -19,8 +19,16 @@ import { NewMyTodoComponent } from './new-my-todo/new-my-todo.component';
 import { OutlineMyTodosComponent } from './outline-my-todos/outline-my-todos.component';
 import { RemoveMyTodoComponent } from './remove-my-todo/remove-my-todo.component';
 import { CountMyTodosComponent } from './count-my-todos/count-my-todos.component';
-import {MyTodoDataService} from './my-todo-data.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MyTodoDataService} from './services/my-todo-data.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { MyToDoReducer } from './store/reducers/my-todo.reducer';
+import { MyToDoEffect } from './store/effects/my-todo.effect';
+import HttpDataService from './services/http-data.service';
+import MyTodoStoreDataService from './services/my-todo-store-data.service';
 
 @NgModule({
   declarations: [
@@ -44,9 +52,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     MatListModule,
     MatMenuModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({myTodos: MyToDoReducer}),
+    EffectsModule.forRoot([MyToDoEffect]),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [MyTodoDataService],
+  providers: [MyTodoDataService, HttpDataService, MyTodoStoreDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

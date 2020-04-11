@@ -1,0 +1,30 @@
+Commands:
+
+	MongoDB:
+	mongo --> to connect
+	use todo-db
+	show dbs
+	show collections
+	db.todos.remove({})
+	db.todos.find().pretty()
+	
+	NodeJS:
+	nodemon server
+	npm test
+	
+	Angular:
+	ng serve
+	ng test
+
+
+
+Open questions:
+
+1. Is the usage of Object assign a good idea?
+2. How does jasmine work in regards to DPI?
+
+
+References:
+
+For testing: https://angular.io/guide/testing
+For templating: https://angular.io/guide/template-syntax

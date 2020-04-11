@@ -1,5 +1,5 @@
 import {TestBed, async, inject} from '@angular/core/testing';
-import {MyTodo} from './my-todo';
+import MyTodo from '../models/my-todo.model';
 import {MyTodoDataService} from './my-todo-data.service';
 import {
   HttpClientTestingModule,

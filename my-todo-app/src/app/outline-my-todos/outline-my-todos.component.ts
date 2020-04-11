@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MyTodoDataService} from '../my-todo-data.service'
-import {RemoveMyTodoComponent} from '../remove-my-todo/remove-my-todo.component';
-import { MyTodo } from '../my-todo';
-import { HttpResponse } from '@angular/common/http';
-import { Observable, timer, interval } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import {MyTodoDataService} from '../services/my-todo-data.service'
+import MyTodo from '../models/my-todo.model';
+import { Store, select } from '@ngrx/store';
+import MyToDoState from '../store/states/my-todo.state';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BeginGetMyToDoAction, BeginToggleMyToDoAction } from '../store/actions/my-todo.action';
 
 @Component({
   selector: 'app-outline-my-todos',
@@ -13,24 +14,41 @@ import { startWith, switchMap } from 'rxjs/operators';
 })
 export class OutlineMyTodosComponent implements OnInit {
   
-  private todos$: MyTodo[]= [];
+  private myToDoList$: MyTodo[]= [];
+  private myToDo$: Observable<MyToDoState>;
+  private MyToDoSubscription: Subscription;
+  private myToDoError: Error = null;
 
   //Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService) { 
+  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
+    this.myToDo$ = store.pipe(select('myTodos'));
   }
 
   ngOnInit() {
-    const eventSource = timer(0, 500);
-    eventSource.pipe(switchMap(() =>this.myTodoDataService.getAll())).subscribe((data: MyTodo[]) => this.todos$ = data);
-    console.log(JSON.stringify(this.todos$));
+    this.MyToDoSubscription = this.myToDo$
+      .pipe(
+        map(x => {
+          this.myToDoList$ = x.myToDos.filter(Boolean);
+          this.myToDoError = x.ToDoError;
+
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    if (this.MyToDoSubscription) {
+      this.MyToDoSubscription.unsubscribe();
+    }
   }
   
   get myTodos(){
-    return this.todos$;
+    console.log('LIST: ' + JSON.stringify(this.myToDoList$));
+    return this.myToDoList$;
   }
 
   toggleComplete(myTodo: MyTodo) {
-    this.myTodoDataService.toggleComplete(myTodo);
-
+    this.store.dispatch(BeginToggleMyToDoAction({ payload: myTodo }));
+    this.store.dispatch(BeginGetMyToDoAction());
   }
 }

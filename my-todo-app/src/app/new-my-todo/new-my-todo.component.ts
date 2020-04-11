@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {MyTodoDataService} from '../my-todo-data.service'
-import { MyTodo } from '../my-todo';
+import {MyTodoDataService} from 'src/app/services/my-todo-data.service'
+import MyTodo from 'src/app/models/my-todo.model';
+import { Store, select } from '@ngrx/store';
+import MyToDoState from '../store/states/my-todo.state';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BeginGetMyToDoAction, BeginCreateMyToDoAction } from '../store/actions/my-todo.action';
 
 @Component({
   selector: 'app-new-my-todo',
@@ -10,21 +15,41 @@ import { MyTodo } from '../my-todo';
 export class NewMyTodoComponent implements OnInit {
 
   public newMyTodo: MyTodo = new MyTodo();
+  private myTodo$: Observable<MyToDoState>;
+  private myToDosList$: MyTodo[] = [];
+  private MyToDoSubscription: Subscription;
+  private myToDoError: Error = null;
 
   //Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService) { 
+  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
+    this.myTodo$ = store.pipe(select('myTodos'));
   }
   
   ngOnInit() {
+    this.MyToDoSubscription = this.myTodo$
+      .pipe(
+        map(x => {
+          this.myToDosList$ = x.myToDos;
+          this.myToDoError = x.ToDoError;
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    if (this.MyToDoSubscription) {
+      this.MyToDoSubscription.unsubscribe();
+    }
   }
 
   addTodo() {
-
     if (!this.newMyTodo.title) {
       return;
     }
-
-    this.myTodoDataService.add(this.newMyTodo);
+    this.store.dispatch(BeginCreateMyToDoAction({ payload: this.newMyTodo }));
+    this.store.dispatch(BeginGetMyToDoAction());
     this.newMyTodo = new MyTodo();
+    this.newMyTodo.complete=false;
+    this.newMyTodo.title = '';
   }
 }

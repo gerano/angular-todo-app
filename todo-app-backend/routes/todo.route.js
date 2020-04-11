@@ -32,7 +32,7 @@ todoRoutes.route('/').get(function (req, res) {
 // GET by id
 todoRoutes.route('/:id').get(function (req, res) {
   let id = req.params.id;
-  Todo.findOne({todoId: id}, function (err, todo){
+  Todo.findOne({_id: id}, function (err, todo){
       if(err) {
 		res.status(404).json("Unable to find Todo");
       }
@@ -51,7 +51,7 @@ todoRoutes.route('/:id').put(function (req, res) {
 		Object.assign(updatedMyTodo, {title: req.body.title});
 	}
 	
-	Todo.updateOne({todoId: req.params.id}, { $set: updatedMyTodo}).then(() => {
+	Todo.updateOne({_id: req.params.id}, { $set: updatedMyTodo}).then(() => {
       	res.status(204).json('Update complete');
     })
     .catch(err => {
@@ -65,7 +65,7 @@ todoRoutes.route('/:id').delete(function (req, res) {
 	res.set('Content-Type', 'application/json');
 	
     Todo.deleteOne({
-		todoId: req.params.id
+		_id: req.params.id
 	}).then(() => {
       	res.status(204).json('Successfully removed');
     })

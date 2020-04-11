@@ -15,7 +15,7 @@ let Todo = new Schema({
   }
 },{
     collection: 'todos'
-}, { _id: false });
+}, { _id: true });
 
 /*Todo.index({
   todoId: 1,

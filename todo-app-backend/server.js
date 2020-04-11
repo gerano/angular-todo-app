@@ -8,7 +8,7 @@ const express = require('express'),
 const todoRoute = require('./routes/todo.route');	
 	
 	mongoose.Promise = global.Promise;
-	mongoose.connect(dbConnectionConfig.DB, {useNewUrlParser: true})
+	mongoose.connect(dbConnectionConfig.DB, {useNewUrlParser: true, useUnifiedTopology: true})
 			.then(
 				() => { console.log('Database is connected!') },
 				err=> { console.log('Can not connect to database ' + err)}

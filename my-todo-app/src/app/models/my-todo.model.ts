@@ -1,5 +1,6 @@
-export class MyTodo {
-    todoId: number; 
+
+export default class MyTodo {
+    _id: number; 
     title: string = '';
     complete: boolean = false;
 
