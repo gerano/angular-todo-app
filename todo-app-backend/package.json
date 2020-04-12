@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit 'test/api.test.js'"
+    "test": "mocha --exit 'test/api.test.js'",
+    "start": "PORT=8080 node ./bin/www"
   },
   "keywords": [],
   "author": "",
