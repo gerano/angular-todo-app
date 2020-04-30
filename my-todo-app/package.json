@@ -28,7 +28,7 @@
     "@ngrx/store": "^9.0.0",
     "@ngtools/webpack": "^9.1.0",
     "core-js": "^2.6.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "minimist": "^1.2.5",
     "popper.js": "^1.15.0",
     "rxjs": "^6.4.0",
