@@ -1,8 +1,8 @@
 
 export default class MyTodo {
-    _id: number; 
-    title: string = '';
-    complete: boolean = false;
+    _id: number;
+    title = '';
+    complete = false;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {MyTodoDataService} from '../services/my-todo-data.service'
+import { Component, OnInit} from '@angular/core';
+import {MyTodoDataService} from '../services/my-todo-data.service';
 import MyTodo from '../models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -13,13 +13,13 @@ import { BeginGetMyToDoAction, BeginToggleMyToDoAction } from '../store/actions/
   styleUrls: ['./outline-my-todos.component.css'],
 })
 export class OutlineMyTodosComponent implements OnInit {
-  
-  private myToDoList$: MyTodo[]= [];
+
+  private myToDoList$: MyTodo[] = [];
   private myToDo$: Observable<MyToDoState>;
   private MyToDoSubscription: Subscription;
   private myToDoError: Error = null;
 
-  //Contructor injection of Service Class
+  // Contructor injection of Service Class
   constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
     this.myToDo$ = store.pipe(select('myTodos'));
   }
@@ -41,8 +41,8 @@ export class OutlineMyTodosComponent implements OnInit {
       this.MyToDoSubscription.unsubscribe();
     }
   }
-  
-  get myTodos(){
+
+  get myTodos() {
     console.log('LIST: ' + JSON.stringify(this.myToDoList$));
     return this.myToDoList$;
   }

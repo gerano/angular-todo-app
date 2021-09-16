@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MyTodoDataService} from 'src/app/services/my-todo-data.service'
+import {MyTodoDataService} from 'src/app/services/my-todo-data.service';
 import MyTodo from 'src/app/models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -20,11 +20,11 @@ export class NewMyTodoComponent implements OnInit {
   private MyToDoSubscription: Subscription;
   private myToDoError: Error = null;
 
-  //Contructor injection of Service Class
+  // Contructor injection of Service Class
   constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
     this.myTodo$ = store.pipe(select('myTodos'));
   }
-  
+
   ngOnInit() {
     this.MyToDoSubscription = this.myTodo$
       .pipe(
@@ -49,7 +49,7 @@ export class NewMyTodoComponent implements OnInit {
     this.store.dispatch(BeginCreateMyToDoAction({ payload: this.newMyTodo }));
     this.store.dispatch(BeginGetMyToDoAction());
     this.newMyTodo = new MyTodo();
-    this.newMyTodo.complete=false;
+    this.newMyTodo.complete = false;
     this.newMyTodo.title = '';
   }
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MyTodoDataService} from '../services/my-todo-data.service'
+import {MyTodoDataService} from '../services/my-todo-data.service';
 import MyTodo from '../models/my-todo.model';
-import { Store, select } from '@ngrx/store';
+import { Store} from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { BeginGetMyToDoAction, BeginRemoveMyToDoAction } from '../store/actions/my-todo.action';
 
 @Component({
@@ -16,8 +14,8 @@ export class RemoveMyTodoComponent implements OnInit {
 
   @Input() public myParentToDo: MyTodo;
 
-  //Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) { 
+  // Contructor injection of Service Class
+  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
   }
 
   ngOnInit() {
@@ -25,10 +23,10 @@ export class RemoveMyTodoComponent implements OnInit {
 
   ngOnDestroy() {
   }
-  
+
   remove() {
-    console.log(JSON.stringify('What is this: ' +this.myParentToDo._id));
-    this.store.dispatch(BeginRemoveMyToDoAction({payload: this.myParentToDo}))
+    console.log(JSON.stringify('What is this: ' + this.myParentToDo._id));
+    this.store.dispatch(BeginRemoveMyToDoAction({payload: this.myParentToDo}));
     this.store.dispatch(BeginGetMyToDoAction());
-  } 
+  }
 }

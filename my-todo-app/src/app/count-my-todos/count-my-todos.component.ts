@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MyTodoDataService} from '../services/my-todo-data.service'
-import { HttpResponse } from '@angular/common/http';
-import { Observable, timer, interval, Subscription } from 'rxjs';
-import { startWith, switchMap, map } from 'rxjs/operators';
+import {MyTodoDataService} from '../services/my-todo-data.service';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import MyTodo  from '../models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -15,13 +14,13 @@ import {BeginGetMyToDoAction} from '../store/actions/my-todo.action';
 })
 export class CountMyTodosComponent implements OnInit {
 
-  private myToDosList$: MyTodo[]= [];
+  private myToDosList$: MyTodo[] = [];
   private myTodo$: Observable<MyToDoState>;
   private MyToDoSubscription: Subscription;
   private myToDoError: Error = null;
 
-  //Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) { 
+  // Contructor injection of Service Class
+  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
   }
 
   ngOnInit() {
@@ -36,7 +35,7 @@ export class CountMyTodosComponent implements OnInit {
       .subscribe();
       this.store.dispatch(BeginGetMyToDoAction());
   }
-  
+
   ngOnDestroy() {
     if (this.MyToDoSubscription) {
       this.MyToDoSubscription.unsubscribe();

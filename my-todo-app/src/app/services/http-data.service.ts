@@ -1,7 +1,5 @@
-import MyTodo from '../models/my-todo.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export default class HttpDataService {
 
-  private uri = 'http://localhost:4000/todo';
+  private uri = 'http://localhost:8080/todo';
 
   constructor(private http: HttpClient) {
   }
@@ -21,11 +19,11 @@ export default class HttpDataService {
   }
 
   public httpPut(id: number, values: any): Observable<any> {
-    let headers = new HttpHeaders();
-    let params = new HttpParams();
-    
+    const headers = new HttpHeaders();
+    const params = new HttpParams();
+
     headers.set('Content-Type', 'application/json');
-    params.set("_id", String(id));
+    params.set('_id', String(id));
 
     return this.http.put(`${this.uri}/${id}`, values, { headers });
   }
@@ -37,21 +35,21 @@ export default class HttpDataService {
   }
 
   public httpGetById(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    let params = new HttpParams();
-    
+    const headers = new HttpHeaders();
+    const params = new HttpParams();
+
     headers.set('Content-Type', 'application/json');
-    params.set("id", String(id));
+    params.set('id', String(id));
 
     return this.http.get(`${this.uri}/${id}`, { headers, params });
   }
 
   public httpDelete(id: number): Observable<any> {
-    let headers = new HttpHeaders();
-    let params = new HttpParams();
-    
+    const headers = new HttpHeaders();
+    const params = new HttpParams();
+
     headers.set('Content-Type', 'application/json');
-    params.set("id", String(id));
+    params.set('id', String(id));
 
     return this.http.delete(`${this.uri}/${id}`, { headers, params });
   }
