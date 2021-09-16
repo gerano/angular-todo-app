@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import  '../../models/my-todo.model';
+import '../../models/my-todo.model';
 import MyTodo from '../../models/my-todo.model';
 
 

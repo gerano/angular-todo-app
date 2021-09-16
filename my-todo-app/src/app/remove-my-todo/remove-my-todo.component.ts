@@ -9,18 +9,12 @@ import { BeginGetMyToDoAction, BeginRemoveMyToDoAction } from '../store/actions/
   templateUrl: './remove-my-todo.component.html',
   styleUrls: ['./remove-my-todo.component.sass']
 })
-export class RemoveMyTodoComponent implements OnInit {
+export class RemoveMyTodoComponent {
 
   @Input() public myParentToDo: MyTodo;
 
   // Contructor injection of Service Class
   constructor(private store: Store<{ myTodos: MyToDoState }>) {
-  }
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
   }
 
   remove() {

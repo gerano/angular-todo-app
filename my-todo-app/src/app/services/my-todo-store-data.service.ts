@@ -12,15 +12,15 @@ export default class MyTodoStoreDataService extends HttpDataService {
   private newMyToDos$: Observable<MyTodo[]>;
 
   public toggleComplete(myTodo: MyTodo): Observable<any> {
-    let httpPutResult$: Observable<any> = this.httpPut(myTodo._id, { complete: !myTodo.complete });
+    const httpPutResult$: Observable<any> = this.httpPut(myTodo._id, { complete: !myTodo.complete });
 
-    return of(httpPutResult$.subscribe((response) => {return this.queryNewMyToDoList()}));
+    return of(httpPutResult$.subscribe((response) => this.queryNewMyToDoList()));
   }
 
   public httpDelete(id: number): Observable<any> {
-    let httpDeleteResult$: Observable<any> = super.httpDelete(id);
+    const httpDeleteResult$: Observable<any> = super.httpDelete(id);
 
-    return of(httpDeleteResult$.subscribe((response: any) => {return this.queryNewMyToDoList()}))
+    return of(httpDeleteResult$.subscribe((response: any) => this.queryNewMyToDoList()));
   }
 
   private queryNewMyToDoList(): Observable<any> {

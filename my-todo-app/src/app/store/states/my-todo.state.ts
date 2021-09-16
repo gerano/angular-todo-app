@@ -1,4 +1,4 @@
-import MyTodo  from '../../models/my-todo.model';
+import MyTodo from '../../models/my-todo.model';
 
 export default class MyToDoState {
   myToDos: MyTodo [];

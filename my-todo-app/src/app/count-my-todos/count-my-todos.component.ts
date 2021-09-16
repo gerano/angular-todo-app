@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import MyTodo  from '../models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -24,7 +24,8 @@ export class CountMyTodosComponent implements OnInit {
 
   ngOnInit() {
     this.myTodo$ = this.store.pipe(select('myTodos'));
-    this.MyToDoSubscription = this.myTodo$
+
+      this.MyToDoSubscription = this.myTodo$
       .pipe(
         map(x => {
           this.myToDosList$ = x.myToDos;
@@ -35,11 +36,11 @@ export class CountMyTodosComponent implements OnInit {
     this.store.dispatch(BeginGetMyToDoAction());
   }
 
-  ngOnDestroy() {
+  /*ngOnDestroy() {
     if (this.MyToDoSubscription) {
       this.MyToDoSubscription.unsubscribe();
     }
-  }
+  }*/
 
   get myTodos() {
     return this.myToDosList$;

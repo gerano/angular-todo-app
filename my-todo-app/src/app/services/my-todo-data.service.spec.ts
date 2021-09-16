@@ -28,13 +28,13 @@ describe('TodoDataService', () => {
     it('should return all todos', inject([MyTodoDataService], (myTodoService: MyTodoDataService) => {
       let myIncompleteTodo = new MyTodo({title: 'That is a NOT completed Todo', complete: false});
       let myCompleteTodo = new MyTodo({title: 'That is a COMPLETED Todo', complete: true});
-      
+
       myTodoService.add(myIncompleteTodo);
       myTodoService.add(myCompleteTodo);
 
       let myTodos: any;
       myTodoService.getAll().subscribe((data: MyTodo[]) => myTodos = data);
-      
+
       expect(myTodos).toEqual([myIncompleteTodo, myCompleteTodo]);
     }));
 
@@ -45,10 +45,10 @@ describe('TodoDataService', () => {
     it('should automatically assign an incrementing id', inject([MyTodoDataService], (myTodoService: MyTodoDataService) => {
       let myIncompleteTodo = new MyTodo({title: 'That is a NOT completed Todo', complete: false});
       let myCompleteTodo = new MyTodo({title: 'That is a COMPLETED Todo', complete: true});
-      
+
       myTodoService.add(myCompleteTodo);
       myTodoService.add(myIncompleteTodo);
-      
+
       expect(myTodoService.getById(1)).toEqual(myCompleteTodo);
       expect(myTodoService.getById(2)).toEqual(myIncompleteTodo);
     }));
@@ -63,11 +63,11 @@ describe('TodoDataService', () => {
 
       myTodoService.add(myIncompleteTodo);
       myTodoService.add(myCompleteTodo);
-      
+
       expect(myTodoService.getAll()).toEqual([myIncompleteTodo, myCompleteTodo]);
-      
+
       myTodoService.deleteById(1);
-      
+
       expect(myTodoService.getAll()).toEqual([myCompleteTodo]);
       myTodoService.deleteById(2);
       expect(myTodoService.getAll()).toEqual([]);
@@ -103,7 +103,7 @@ describe('TodoDataService', () => {
     it('should return null if todo is not found', inject([MyTodoDataService], (myTodoService: MyTodoDataService) => {
       let myIncompleteTodo = new MyTodo({title: 'That is a NOT completed Todo', complete: false});
       myTodoService.add(myIncompleteTodo);
-      
+
       let updatedTodo = myTodoService.updateById(2, {
         title: 'my new test title!'
       });
@@ -119,10 +119,10 @@ describe('TodoDataService', () => {
       let myIncompleteTodo = new MyTodo({title: 'That is a NOT completed Todo', complete: false});
 
       myTodoService.add(myIncompleteTodo);
-      
+
       let updatedTodo = myTodoService.toggleComplete(myIncompleteTodo);
       expect(updatedTodo.complete).toEqual(true);
-      
+
       updatedTodo = myTodoService.toggleComplete(myIncompleteTodo);
       expect(updatedTodo.complete).toEqual(false);
     }));

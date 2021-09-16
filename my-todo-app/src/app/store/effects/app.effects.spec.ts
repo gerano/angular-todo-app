@@ -12,10 +12,10 @@ describe('AppEffects', () => {
       ]
     });
 
-    //effects = TestBed.get<AppEffects>(AppEffects);
+    // effects = TestBed.get<AppEffects>(AppEffects);
   });
 
   it('should be created', () => {
-    //expect(effects).toBeTruthy();
+    // expect(effects).toBeTruthy();
   });
 });

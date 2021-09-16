@@ -5,13 +5,14 @@ import MyToDoState from '../store/states/my-todo.state';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BeginGetMyToDoAction, BeginCreateMyToDoAction } from '../store/actions/my-todo.action';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-new-my-todo',
   templateUrl: './new-my-todo.component.html',
   styleUrls: ['./new-my-todo.component.css'],
 })
-export class NewMyTodoComponent implements OnInit {
+export class NewMyTodoComponent implements OnInit, OnDestroy {
 
   public newMyTodo: MyTodo = new MyTodo();
   private myTodo$: Observable<MyToDoState>;

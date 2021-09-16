@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import MyTodo from '../models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -11,7 +11,7 @@ import { BeginGetMyToDoAction, BeginToggleMyToDoAction } from '../store/actions/
   templateUrl: './outline-my-todos.component.html',
   styleUrls: ['./outline-my-todos.component.css'],
 })
-export class OutlineMyTodosComponent implements OnInit {
+export class OutlineMyTodosComponent implements OnInit, OnDestroy {
 
   private myToDoList$: MyTodo[] = [];
   private myToDo$: Observable<MyToDoState>;
@@ -32,7 +32,7 @@ export class OutlineMyTodosComponent implements OnInit {
 
         })
       )
-      .subscribe();
+      .subscribe({next: () => {}});
   }
 
   ngOnDestroy() {

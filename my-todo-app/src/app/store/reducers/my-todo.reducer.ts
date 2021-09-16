@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ToDoActions from '../actions/my-todo.action';
 import MyTodo from '../../models/my-todo.model';
-import MyToDoState, { initializeState } from '../states/my-todo.state'
+import MyToDoState, { initializeState } from '../states/my-todo.state';
 
 export const intialState = initializeState();
 
