@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import MyTodo  from '../models/my-todo.model';
-import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, timer} from 'rxjs';
 import HttpDataService from './http-data.service';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

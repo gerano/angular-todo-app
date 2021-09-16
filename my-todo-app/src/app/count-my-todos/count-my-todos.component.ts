@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MyTodoDataService} from '../services/my-todo-data.service';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import MyTodo  from '../models/my-todo.model';
@@ -20,7 +19,7 @@ export class CountMyTodosComponent implements OnInit {
   private myToDoError: Error = null;
 
   // Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
+  constructor(private store: Store<{ myTodos: MyToDoState }>) {
   }
 
   ngOnInit() {
@@ -33,7 +32,7 @@ export class CountMyTodosComponent implements OnInit {
         })
       )
       .subscribe();
-      this.store.dispatch(BeginGetMyToDoAction());
+    this.store.dispatch(BeginGetMyToDoAction());
   }
 
   ngOnDestroy() {

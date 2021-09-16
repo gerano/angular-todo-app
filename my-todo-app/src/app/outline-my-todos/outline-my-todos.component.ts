@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import {MyTodoDataService} from '../services/my-todo-data.service';
 import MyTodo from '../models/my-todo.model';
 import { Store, select } from '@ngrx/store';
 import MyToDoState from '../store/states/my-todo.state';
@@ -20,7 +19,7 @@ export class OutlineMyTodosComponent implements OnInit {
   private myToDoError: Error = null;
 
   // Contructor injection of Service Class
-  constructor(private myTodoDataService: MyTodoDataService, private store: Store<{ myTodos: MyToDoState }>) {
+  constructor(private store: Store<{ myTodos: MyToDoState }>) {
     this.myToDo$ = store.pipe(select('myTodos'));
   }
 
